@@ -2,7 +2,7 @@
 using PerEntityExample.Writers;
 
 var indexes = new[] { "XU30", "XU100", "XU500" };
-var equities = new[] { "EKGYO", "GARAN", "ISMEN" };
+var stocks = new[] { "EKGYO", "GARAN", "ISMEN" };
 
 const string target = "financialRecords";
 var writers = new List<IWriter<IFinancialRecord>>
@@ -50,7 +50,7 @@ async IAsyncEnumerable<IFinancialRecord> GetFinancialRecordStreamingAsync()
     var random = new Random();
 
     var prices = new Dictionary<string, double>();
-    foreach (var key in indexes.Concat(equities))
+    foreach (var key in indexes.Concat(stocks))
         prices[key] = 10 + random.NextDouble() * 10;
 
     while (true)
@@ -59,7 +59,7 @@ async IAsyncEnumerable<IFinancialRecord> GetFinancialRecordStreamingAsync()
         var isBasic = false;
         if (random.Next(2) == 0)
         {
-            key = equities[random.Next(equities.Length)];
+            key = stocks[random.Next(stocks.Length)];
         }
         else
         {
